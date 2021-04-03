@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     void UpdateScrollBar(){
 
         ArrayList<Employee> employees=SQLWrapper.GetAll();
-        if (employees.size()==0)
+        if (employees==null)
             return;
         TableLayout tableLayout = findViewById(R.id.main_Table);
         if (tableLayout.getChildCount()>1)
             tableLayout.removeViewAt(1);
 
-        for (Employee employee : SQLWrapper.GetAll())
+        for (Employee employee : employees)
         {
 
             TableRow tableRow=new TableRow(this);

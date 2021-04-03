@@ -3,7 +3,6 @@ package com.shaman.kursach;
 import com.orm.SugarRecord;
 
 public class Employee  extends SugarRecord {
-    Integer Id;
     Integer DepartmentNumber;
     Integer EmployeeNumber;
     String Surname;
@@ -12,12 +11,12 @@ public class Employee  extends SugarRecord {
 
     public Employee(){
     }
-    public Employee(Integer id, Integer departmentNumber, Integer employeeNumber, String surname, Integer positionCode, Integer salaryAmount){
-        Id=id;
+    public Employee( Integer departmentNumber, Integer employeeNumber, String surname, Integer positionCode, Integer salaryAmount){
         DepartmentNumber=departmentNumber;
         EmployeeNumber=employeeNumber;
         Surname=surname;
         PositionCode=positionCode;
         SalaryAmount=salaryAmount;
     }
+
 }

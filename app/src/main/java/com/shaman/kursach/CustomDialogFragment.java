@@ -33,10 +33,10 @@ public class CustomDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Вибрано співробітника")
-                .setMessage(R.string.surname+": "+_employee.Surname)
+                .setMessage("Прізвище та ініціали: "+_employee.Surname)
                 .setIcon(R.drawable.ic_launcher_background)
                 .setNegativeButton("Видалити", (dialog, id) -> {
-                    SQLWrapper.Delete(_employee.Id);
+                    SQLWrapper.Delete(_employee);
                     //_mainActivity.UpdateScrollBar();
                     _tableLayout.removeView(_tableRow);
                     // Закрываем окно
@@ -45,7 +45,7 @@ public class CustomDialogFragment extends DialogFragment {
                 .setNeutralButton("Редактувати", (dialog, id) -> {
 
                     Intent intent = new Intent(_mainActivity,EditEmployeeActivity.class);
-                    intent.putExtra("employeeId", _employee.Id);
+                    intent.putExtra("employeeId", _employee.getId());
                     startActivity(intent);
                     // Закрываем окно
                     dialog.cancel();

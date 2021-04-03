@@ -56,7 +56,7 @@ public class EditEmployeeActivity extends AppCompatActivity {
 
         int id = parseInt(arguments.get("employeeId").toString());    // Hello World
         try {
-            SQLWrapper.Modify(id,new Employee(id, parseInt(DepNumberEditText.getText().toString()), parseInt(EmplNumberEditText.getText().toString()), SurnameEditText.getText().toString(), parseInt(PosCodeEditText.getText().toString()), parseInt(SalaryAmountEditText.getText().toString())));
+            SQLWrapper.Modify(SQLWrapper.GetById(id),new Employee(parseInt(DepNumberEditText.getText().toString()), parseInt(EmplNumberEditText.getText().toString()), SurnameEditText.getText().toString(), parseInt(PosCodeEditText.getText().toString()), parseInt(SalaryAmountEditText.getText().toString())));
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }

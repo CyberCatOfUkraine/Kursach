@@ -30,8 +30,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
         AddBtn=findViewById(R.id.add_btn);
 
         AddBtn.setOnClickListener(v->{
-            int newItemID=SQLWrapper.GetSize()+1;
-            SQLWrapper.Add(new Employee(newItemID, parseInt(DepNumberEditText.getText().toString()), parseInt(EmplNumberEditText.getText().toString()),SurnameEditText.getText().toString(), parseInt(PosCodeEditText.getText().toString()), parseInt(SalaryAmountEditText.getText().toString())));
+            SQLWrapper.Add(new Employee( parseInt(DepNumberEditText.getText().toString()), parseInt(EmplNumberEditText.getText().toString()),SurnameEditText.getText().toString(), parseInt(PosCodeEditText.getText().toString()), parseInt(SalaryAmountEditText.getText().toString())));
         this.finish();
         });
     }

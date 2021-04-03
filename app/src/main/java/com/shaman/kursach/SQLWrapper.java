@@ -1,39 +1,60 @@
 package com.shaman.kursach;
 
-import android.widget.Toast;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQLWrapper {
 
-    private static final ArrayList<Employee> _employees=new ArrayList<>();
     public static ArrayList<Employee> GetAll(){
-        return _employees;
+        try {
+            ArrayList<Employee> employees =(ArrayList<Employee>) Employee.listAll(Employee.class);
+            return employees;
+        }catch (Exception e){
+            return null;
+        }
     }
     public static void Add(Employee employee){
-        _employees.add(employee);
+        /*Employee employeeExample=new Employee(employee);
+        employeeExample.save();*/
+        employee.save();
     }
-    public static Employee GetById(int id){
-        Employee employee=null;
-        for (Employee employeeValue:_employees) {
-            if (employeeValue.Id==id)
-                employee=employeeValue;
-        }
-
-        return employee;
+    public static Employee GetById(long id){
+        return Employee.findById(Employee.class,id);
     }
-    public static void Modify(int id,Employee newEmployee)  {
-        _employees.remove(GetById(id));
-        _employees.add(newEmployee);
+    public static void Modify(Employee oldEmployee,Employee newEmployee)  {
+        Employee employee=GetById(oldEmployee.getId());
+        employee.SalaryAmount=newEmployee.SalaryAmount;
+        employee.PositionCode=newEmployee.PositionCode;
+        employee.Surname=newEmployee.Surname;
+        employee.EmployeeNumber=newEmployee.EmployeeNumber;
+        employee.DepartmentNumber=newEmployee.DepartmentNumber;
+        employee.save();
     }
-    public static void Delete(int id){
-        _employees.remove(GetById(id));
+    public static void Delete(Employee employee){
+        employee.delete();
     }
     public static String MakeSQL(String query){
-        return null;
-    }
-    public static int GetSize(){
-        return  _employees.size();
+        StringBuilder result= new StringBuilder();
+        try {
+            List<Employee> employees=Employee.findWithQuery(Employee.class,query);
+
+            result.append("[");
+            for (int i = 0; i < employees.size(); i++) {
+                Employee employee = employees.get(i);
+                result.append("{");
+                result.append("Прізвище та ініціали : ").append(employee.Surname).append(";");
+                result.append("Номер відділу : ").append(employee.DepartmentNumber).append(";");
+                result.append("Табельний номер працівника : ").append(employee.EmployeeNumber).append(";");
+                result.append("Код посади : ").append(employee.PositionCode).append(";");
+                result.append("Розмір зарплати : ").append(employee.SalaryAmount).append(";");
+                result.append("}");
+                if (employees.size()>1&&i<employees.size()-2) result.append(",");
+            }
+            result.append("]");
+        }catch (Exception e){
+            result.append(e.getMessage());
+        }
+        return result.toString();
     }
 
 }
