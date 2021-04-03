@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Курсова робота</string>
+    <string name="employees">Кадри</string>
+    <string name="departmentNumber">Номер відділу</string>
+    <string name="employeeNumber">Табельний номер працівника</string>
+    <string name="surname">Прізвище та ініціали</string>
+    <string name="positionCode">Код посади</string>
+    <string name="salaryAmount">Розмір зарплати</string>
+    <string name="add">Додати</string>
+    <string name="makeSQLQuery">зробити SQL запит</string>
+    <string name="updateData">Оновити дані</string>"
+    <string name="query">Запит:</string>
+    <string name="submit">Підтвердити</string>
+    <string name="result">Результат:</string>
+</resources>
