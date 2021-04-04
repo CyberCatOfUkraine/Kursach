@@ -33,10 +33,14 @@ public class SQLWrapper {
     public static void Delete(Employee employee){
         employee.delete();
     }
+
+    public static List<Employee> MakeAQL(String query){
+        return Employee.findWithQuery(Employee.class,query);
+    }
     public static String MakeSQL(String query){
         StringBuilder result= new StringBuilder();
         try {
-            List<Employee> employees=Employee.findWithQuery(Employee.class,query);
+            List<Employee> employees= MakeAQL(query)/*Employee.findWithQuery(Employee.class,query)*/;
 
             result.append("[");
             for (int i = 0; i < employees.size(); i++) {
@@ -48,7 +52,7 @@ public class SQLWrapper {
                 result.append("Код посади : ").append(employee.PositionCode).append(";");
                 result.append("Розмір зарплати : ").append(employee.SalaryAmount).append(";");
                 result.append("}");
-                if (employees.size()>1&&i<employees.size()-2) result.append(",");
+                if (employees.size()>1&&i<employees.size()-1) result.append(",");
             }
             result.append("]");
         }catch (Exception e){
